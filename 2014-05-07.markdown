@@ -1,0 +1,83 @@
+# General
+
+The complexity class P = the set of all decision problems that can be solved by some algorithm in polynomial time
+
+The complexity class NP = the set of all decision problems where yes instances can be verified in polynomial time, given a certificate
+
+P is a subset of NP
+
+No problems proven to be NP and not P
+
+# Non-NP problem
+
+Given a weighted graph and an integer K, is it true that no Hamiltonian Cycle exists with cost <= K?
+Seems like we can't verify in polynomial time
+
+# New problem:
+
+Given a graph, does it contain a Hamiltonian cycle?
+Instead of solving this problem, we try to verify a solution to the problem
+Given a sequence of nodes, we can verify that is
+
+1.  Check that we follow 
+2.  Check that its a cycle
+3.  Check that each node is visited
+
+# Verification Algorithm
+
+For a problem, it takes a piece of information (certificate) and uses it to verify that an instance has an answer of "yes" (i.e. that it is a yes-instance)
+
+# TSP
+
+## Optimization problem:
+
+Given a weighted graph, find a cheapest Hamiltonian Cycle
+
+## Decision problem:
+
+Given a weighted graph and an integer K, is there a Hamiltonian Cycle with cost <= K?
+
+## Verification Algorithm
+
+Cerificate is the cycle
+
+1.  Check that it is a Hamiltonian cycle
+2.  Check that the weighted value is <= K
+
+# Knapsack
+
+## Optimization problem:
+
+Given a set of objects with weight and value, and a size bound, find a subset of objects where size <= bound and where value is maximized
+
+## Decision problem:
+
+Given a set of objects with weight and value, a size bound and an integer K, is there a subset whos size is <= bound and where value >= K?
+
+## Verification Algorithm
+
+Cerificate is set of objects
+
+1.  Add up the set of objects costs
+2.  Compares to cost bound
+3.  Add up set of objects values
+4.  Compare the value to K
+
+# Shortest Path
+
+## Optimization problem:
+
+Given a weighted graph, a start node and a goal node, find a shortest path between them
+
+## Decision problem:
+
+Given a weighted graph, a start node, a goal node and an integer K, is there a path with cost <= K?
+
+## Verification Algorithm
+
+Certificate is a set of nodes
+
+1.  Check that it is a path
+2.  Check that the start and end are correct
+3.  Check total cost is <= K
+
