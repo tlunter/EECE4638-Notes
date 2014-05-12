@@ -1,0 +1,52 @@
+# Basis
+
+If some L <= NPC is also <= P, then for all L' <= NP, L' <= P
+As a result, we believe NP-complete problems are not intractable
+
+Similarly, if for some L' <= NP and L' </= P, then all NP-complete problems are intractable and P =/= NP.
+
+A problem L is NP-complete if L is in NP, and if all problems L' in NP can be reduced to L (in polynomial time)
+
+# Proving NP-complete
+
+To prove a problem, X, NP-complete, show that Y <= X where Y is a problem known to be NP-complete
+
+# Subproblems
+
+We might not be interested in the most general version of a problem.
+
+A special case is called subproblem.
+
+## Graph 3-colorability
+
+Given a graph, does a legal coloring exist with 3 colors?
+
+## Vertex cover
+
+Given a graph, a subset of nodes where every node is adjacent to a selected node
+
+Given a graph, is there a vertex cover of size K?
+
+    | Problem           |   P    |  NPC   |
+    |-------------------|--------|--------|
+    | 3-color           | D <= 3 | D >= 4 |
+    | Vertex cover      | D <= 2 | D >= 3 |
+    | Hamiltonian Cycle | D <= 2 | d >= 3 |
+
+# Greedy Algorithm
+
+Consider the MST problem again:
+
+    We are looking for a cheapest spanning tree
+
+    MST(graph, weights)
+    {
+        A = empty set
+
+        while A is not a spanning tree
+        {
+            select the cheapest edge (u,v) that can be added without creating a cycle
+            A = A union {(u,v)}
+        }
+        return A
+    }
