@@ -1,0 +1,78 @@
+# Subset Partition
+
+Find half the sum of all integers, use subset sum to find that value.
+If a subset sum exists, then there must be another subset that also equals the same value.
+
+# General Form
+
+Given two problems L1 and L2, we say that L1 can be *transformed* to L2 in polynomial time
+    if instances of L1 can be rewritten to look like instances of L2 in polynomial time,
+    and such that the answers to each instance are the same (both "yes" or "no")
+
+L1 <= L2<br>
+SP <= SS<br>
+HC <= TSP
+
+1.  If L1 <= L2 and if L2 <= P then L1 <- P.
+2.  If L1 <= L2 and if L1 </= P then L2 </= P ("</=" = not in)
+
+# NP-Completeness
+
+A problem is NP-complete if
+
+1.  L is NP
+2.  For every problem L' in NP, they have to be transformable to L (L' <= L)
+
+If some problem L is in NPC and L is in P, then all problems in NP are in P
+
+## Proof
+
+If L is in NPC, then for all L' in NP, L' <= L.
+But if L <= P, then L' P y our first results.
+
+If some problem L' <= NP and L' </= P, then all NP-complete problems must be intractable
+
+Assume L' <= NP and L' </= P, and assume some NP-complete problem L is <= P.
+By definition of NP-completeness L' <= L.  So if L' </= P, L <= P which is a contradiction
+
+If any NP-complete problem is easy, then all problems in NP are easy.
+
+In any problem in NP is hard, then all NP-complete problems are hard.
+
+# How to find an NP-complete problem?
+
+## Satisfiability (SAT)
+
+    (X1 + X2 + (~X4))(X2 + X3)(~X4)
+    
+    given X1, X2, X3, X4 = T
+    
+    => False
+
+A boolean expression is *satisfiable* if there is some assignment of values to variables that makes the expression true.
+SAT: Given a boolean expression, is it satisfiable?
+
+### Not satisfiable
+
+(X)(~X)
+
+## Classroom problem
+
+(X1 + X2 + X3)(X1 + (~X2))(X2 + (~X3))(X3 + (~X1))((~X1) + (~X2) + (~X3))
+
+At least one has to be 0 and 1
+
+try X1, X2, X3 = 0
+try X1, X2, X3 = 1
+
+No way to satisfy all the clauses, so not satisfiable
+
+# SAT = NPC (Cook, Stephen (1971). "The complexity of theorem proving procedures".)
+
+Difficult to do and not commonly done
+
+There is an easier way to prove new problems NP-complete.
+
+L must be NP.
+If we can show that SAT <= L, then we know L is NP-complete.
+All problems in NP <= SAT, SAT <= L
