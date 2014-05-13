@@ -1,0 +1,89 @@
+# Head Partition
+
+## Teacher
+
+A group of arcs is *compatible* if no two of them point to the same node
+
+## Me
+
+Given a directed graph, find a max subset of edges such that each node is only pointed at once
+
+## Directed graph
+
+### Greedy Algorithm 1
+
+For each arc, add it if it points to an unmarked node and then mark that node.
+Order in which we consider the arcs doesn't matter
+
+### Greedy Algorithm 2
+
+For each unmarked node, select some arc that points to it, if it exists.
+
+## Weighted directed graph
+
+Find a compatible subset with the largest total weight
+
+### Greedy Algorithm 1
+
+Consider the arcs in order of decreasing weight.
+Add the arc if it points to an unmarked node and mark the node.
+
+### Greedy Algorithm 2
+
+For each node, select the largest arc that points to it, if it exists.
+
+# Partition
+
+Let E be a finite set and \pi be a partition of E
+
+\pi is a collection of disjoint subsets of E that collectively cover E
+
+A subset of E is *compatible* if no two elemets of the subset are in the same component of \pi
+
+E={e1, ..., e8}
+\pi={{e1}, {e2, e3}, {e4, e5}, {e6, e7, e8}}
+W  =  5     3   4     7   8     2   6   1
+
+{e1, e4, e7}     -> compatible
+{e1, e4, e5, e6} -> not compatible
+
+## Find longest compatible subset
+
+### Algorithm
+
+Take any element from each component
+
+## Find a compatible with the largest weights
+
+### Algorithm 1
+
+Consider each component,
+select the element with the largest weight.
+
+### Algorithm 2
+
+Consider each element in decreasing order of largest weight,
+select the element if its in an unmarked component,
+and then mark the component.
+
+# Matching Concepts
+
+Given a matching:
+
+-   edges in the matching are *matched edges*
+-   edges not in the matching are *free edges*
+-   nodes adjacent to matched edges are *matched nodes*
+-   nodes not adjacent to matched edges are *exposed*
+
+## Agumenting path
+
+1.  Edges traversed alternate between matched and free edges
+2.  The first adn last nodes are exposed
+
+Given an augmenting path, we can invert the edges along the path (marked -> free, free -> marked).
+The number of matched edges increased by one.
+
+A matching is optimal if and only if the graph has no augmenting path with respect to the matching
+
+If there is an augmenting path     -> matching is not optimal
+If there is not an augmenting path -> matching is optimal
