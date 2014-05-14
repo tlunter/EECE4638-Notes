@@ -1,0 +1,25 @@
+# Matching Problem
+
+## Augmenting Path Algorithm
+
+    start: an empty matching
+
+    while (an augmenting path exists):
+        Flip edges along the path
+
+    return: the matching
+
+
+# Bipartite graph
+
+    Start at an exposed node
+
+    Do a breath first search traversal
+
+    make sure edges alternate (matched/free)
+
+    Don't visit nodes more than once
+
+    Stop if another exposed node is reached
+
+    The search graph has no more nodes than the original graph -> this is a fast algorithm
