@@ -27,11 +27,11 @@ Given a graph, a subset of nodes where every node is adjacent to a selected node
 
 Given a graph, is there a vertex cover of size K?
 
-    | Problem           |   P    |  NPC   |
-    |-------------------|--------|--------|
-    | 3-color           | D <= 3 | D >= 4 |
-    | Vertex cover      | D <= 2 | D >= 3 |
-    | Hamiltonian Cycle | D <= 2 | d >= 3 |
+| Problem           |   P    |  NPC   |
+|-------------------|--------|--------|
+| 3-color           | D <= 3 | D >= 4 |
+| Vertex cover      | D <= 2 | D >= 3 |
+| Hamiltonian Cycle | D <= 2 | d >= 3 |
 
 # Greedy Algorithm
 
