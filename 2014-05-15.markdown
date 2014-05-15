@@ -1,0 +1,128 @@
+To solve matching problems, a pure greedy algorithm could not always find an optimal solution
+Instead, we developed the augmenting path algorithm to solve matching problems
+
+Finding augmenting paths quickly isn't obvious in general graphs
+Bipartite graphs are more obvious
+
+This algorithm is not greedy in the usual sense - edges that are selected are often later unselecte.
+This suggests we are backtracking which could mean that the algorithm runs very slowly
+This algorithm is fast - the matching we are making never shrinks.  It adds one edge in every iteration
+This is a greedy algorithm with respect to the size of the matching, no in divided edges
+
+# Integer and Linear Programming
+
+You are a politician running for election
+You have 3 areas in your district: urban,   suburban rural
+                       population: 100,000, 200,000, 50,000
+
+Your goal: win a majority of votes in each district
+
+Advertising areas:
+
+-   build roads
+-   gun control
+-   farm subsities
+-   gas tax
+
+
+Effect of advertising expenses (in thousands of votes) for every 1000 spent
+
+|                | urban | suburban | rural |
+|----------------|-------|----------|-------|
+| build roads    | -2    | 5        | 3     |
+| gun control    | 8     | 2        | -5    |
+| farm subsities | 0     | 0        | 10    |
+| gas tax        | 10    | 0        | -2    |
+
+If $20,000 is spent on roads, $0 is spent on gun control, $4,000 on farm subsities, and $9,000 on gas taxes
+
+| area     | total votes |
+|----------|-------------|
+| urban    | 50,000      |
+| suburban | 100,000     |
+| rural    | 82,000      |
+
+This suggests we can pay less and still win half the votes in each area
+
+## Linear Programming
+
+Here is an LP formation of this problem:
+
+    Let x1,x2,x3,x4 represent the money spent on each area (in 1000s)
+
+    -2x1 + 8x2 +  0x3 + 10x4 >= 50
+     5x1 + 2x2 +  0x3 +  0x4 >= 100
+     3x1 - 5x2 + 10x3 -  2x4 >= 25
+
+    Minimize x1 + x2 + x3 + x4
+
+    x1,x2,x3,x4 >= 0
+
+### Good news:
+
+-   Many problems can be expressed as LP formulation
+-   Off-the-shelf solutions exist
+-   The solvers run very fast
+
+### General Linear Programs
+
+Given a set of constants a1, ..., an and variables x1, ..., xn,
+a linear function on the variables is:
+
+    f(x1, ..., xn) = a1x1+a2x2+...+anxn = sum from j=1 to n (ajxj)
+
+Given a constant b and a linear function f,
+
+#### Linear inequalities and equalities/Constraints
+
+    lim f(x1, ..., xn) <= b 
+    lim f(x1, ..., xn) >= b 
+    lim f(x1, ..., xn)  = b 
+
+A linear programming problem is the problem of minimizing or maximizing a linear function subject to a finite set of linear constraints
+
+### Example:
+
+    Maximize x1 + x2       <- Objective function
+
+    Subject to:
+    
+        4x1 - x2  <=  8   <--
+        2x1 + x2  <= 10     |-- constraints
+        5x1 - 2x2 >= -2   <--
+        x1, x2    >=  0   <- non negativity constraints
+
+        ^^^^^^^^^^^^^^^-- feasible region
+
+The variables may be integral or non-integral, so in general there is an infinite number of points to consider
+Exhaustive approaches suck
+
+#### Optimal values
+
+Most lie on a boundary of the feasible region and at least one must be on an intersecton of two boundaries
+
+If the objective line is parallel to one of the boundaries, we can have an infinite number of solutions
+
+If the feasible set is empty (area where all equations can be satisfied), there is no solution
+
+If feasible region is unbounded, possibility of no solution (there is always a better solution)
+
+### Standard Form (How to write LP formulations)
+
+    n is the number of variables
+    m is the number of constraints
+    
+    Given constants: {c1, ..., cn}, {b1, ..., bm} and n*m values aij for {i=1, ..., m, j=1, ..., n}.
+    
+    Find {x1, ..., xn}, such that we maximize 
+        the sum from j=1 to n cjxj subject to
+        the sum from j=1 to n aijxj <= bi for i=1, ..., m
+    
+    Assume xj >= 0 for j=1, ..., n
+    
+    Let A=(aij) be an mxn matrix
+        b=(bi)  be an m dimensional vector
+        c=(cj)  be an n dimensional vector
+        x=(xj)  be an n dimensional vector
+
+    Maximize cTx subject to Ax <= b, x >= 0
