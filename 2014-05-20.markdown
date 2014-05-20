@@ -1,0 +1,43 @@
+# Linear Programming Review
+
+1.  Maximize x1 + 2x2
+2.  Subject to x1 < x2
+
+LP formulation linear constraints and objective function
+
+## Graphical
+
+plotting constraints
+
+## Simplex
+
+Use the optimality test
+
+A LPF solution is optimal if its neighbors are worse
+
+## 3D Example
+
+    x1 <= 4
+    x2 <= 4
+    x1 + x2 <= 6
+    -x1 + 2x3 <= 4
+    x1,x2,x3 >= 0
+
+Each constant boundary is now a *plane* instead of a *line*
+CPF solutions are at the intersection of *three* constants (not two)
+
+The endpoints of edges are adjacent CPF solutions
+
+# Integer-Linear Programming (ILP)
+
+This is an LP problem where one or more variables are restrictde to being integral
+
+ILP is NP-complete -> solving small problems can take a long time
+
+Rounding off an LP solution can give infeasible solutions
+
+## What if the ILP solution is better than the LP solution
+
+IE What if Zilp < Zlp (in a minimization problem)
+
+Not possible, since integral is a subset of the general LP
