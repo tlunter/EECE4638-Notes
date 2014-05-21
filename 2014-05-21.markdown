@@ -1,0 +1,17 @@
+# Topics
+
+## Set Packing
+
+Use LP to find a collection of subsets that cover every item at most once
+
+## Set Partitioning
+
+Use LP to find a collection of subsets that cover every item exactly once
+
+## Set Covering
+
+Use LP to find a collection of subsets that cover every item at least once
+
+# Using AMPL
+
+Google it basically
