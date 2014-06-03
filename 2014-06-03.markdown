@@ -1,0 +1,20 @@
+# Implementing Branch and Bound
+
+Fathomed if:
+
+1.  Worst than best solution so far - value lower than current best
+2.  Infeasible solution             - cost too high
+3.  Complete solution               - all objects decided
+
+    initialize the list of subproblems
+    initialize the best solution found so far
+    while the list is not empty {
+        select a subproblem
+        check to see if its fathomed (infeasible, complete or bounded)
+        for the next subject {
+            add it --> add it to the list if not fathomed
+            don't add it --> add it to the list if not fathomed
+            update the best soution found so far if this is a complete solution
+        }
+    }
+
