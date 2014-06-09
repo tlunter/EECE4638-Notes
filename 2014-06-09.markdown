@@ -1,0 +1,66 @@
+# Local Branch
+
+*   Descent (2-opt and 3-opt)
+*   Steepest descent (2-opt and 3-opt)
+*   Taboo search
+*   Variable depth search
+
+# Threshold Accepting
+
+## Regular descent
+
+    x = some initial solution
+    done = false
+
+    repeat
+        x' = a cheapest solution in N(X)
+
+        if c(x') < c(x)
+            x = x'
+        else
+            done = true
+    until done
+
+## New algorithm
+
+    x = some initial solution
+
+    x* = x
+    k = 0
+
+    repeat
+        x' = generate(N(x)) # returns solution from neighborhood
+        if c(x') - c(x) < t(k) # threshold (positive)
+            x = x'
+
+            if c(x*) < c(x)
+                x* = x
+        k = k + 1
+    until stop
+
+For `t(k) = 0`, looks like descent: only go to better neighbors.
+For `t(k) = infinite`, goes to any neighbor.
+The `t(k)` value lets us tune the solver to shift diversification (t large) to intensification (t small).
+
+    t(k) >= t(k+1) usually
+
+    t(0) = positive number`
+
+## Simulated Annealing
+
+Algorithm similar to threshold accepting but much more accepting
+
+Instead of a fixed accepting threshold, we use a probabilistic approach.
+I.E. t(k) is now a random variable
+
+Given a current solution `x` and a randomly selected neighbor `x'`:
+the probability that `x'` is accepted is:
+
+    1 if c(x') < c(x)
+    e^((c(x)-c(x'))/dk) if c(x') > c(x) # might accept a worse neighbor
+
+1.  Start with some initial solution
+2.  Set dk to a large value
+3.  Randomly select neighbors
+4.  Accept using the probability function
+5.  Slowly decrease dk
