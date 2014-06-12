@@ -1,0 +1,81 @@
+# Network Flow
+
+[Wikipedia](https://en.wikipedia.org/wiki/Maximum_flow_problem)
+
+A flow network is a directed graph
+
+![Graph](/2014-06-12-graph.jpg?raw=true)
+
+There is a capacity `c(u,v)` for each arc (directed arrow).
+
+A flow is a value f(u,v) that satifies 3 conditions
+
+1.  `f(u,v) <= c(u,v)` - capacity
+2.  `f(u,v) = -f(v,u)` - skew symmetry
+3.  For all `u` excluding source and sink: `sum of f(u,v) over v = 0` - flow cosumption
+
+## Example of a flow
+
+![Legal Flow](/2014-06-12-legal-flow.jpg?raw=true)
+
+No negative or zero flows are shown.
+In these cases, just shwo the capacity.
+This is a legal flow.
+The value of a flow, `|f|`, is the flow out of the source or into the sink.
+
+## Question?
+
+Given a flow, what is the maximum flow?
+
+# Maximum Bipartite Matching
+
+![Bipartite Graph](/2014-06-12-bipartite-graph.jpg?raw=true)
+
+![Maximum Flow with Bipartite Matching](/2014-06-12-maximum-flow-bipartite.jpg?raw=true)
+
+Works, because a matching states that only one node's edge can be matched.
+Can always route 1 unit of flow along those arcs/edges, legally.
+
+If we have a maximum matching of size 3, we can make a flow of size 3.
+
+If we have a maximum flow, we can create a maximum matcihng.
+
+## Redisidual Network
+
+![Graph](/2014-06-12-graph-2.jpg?raw=true)
+
+Given a graph and a `|f| = 19`, the risidual capacity is the flow in the opposite direction
+
+![Residual Flow](/2014-06-12-residual-flow-1.jpg?raw=true)
+
+    cf(u,v) = c(u,v) - f(u,v)
+
+![Residual Flow](/2014-06-12-residual-flow-2.jpg?raw=true)
+
+A path from the source to the sink in the residual flow network shows where we can legally add flow.
+This always produces a legal flow.
+For all internal nodes, we have the same increase in flow entering and leaving each node.
+This is an augmenting path.
+
+The minimum residual capacity along the path is an augmenting path, cf.
+Given the augmentating path amount, we can segment by along the path
+
+![Residual Flow](/2014-06-12-graph-3.jpg?raw=true)
+
+## Ford-Fulkerson Algorithm
+
+[Wikipedia](https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm)
+
+    for each edge (u,v)
+        f[u,v] = 0
+        f[v,u] = 0
+
+    while there exists a path p from s to t in the residual flow network
+        cf(p) = minimal residual capacity along p
+
+        for all edges (u,v) in p
+            f[u,v] = f[u,v] + cf(p)
+            f[v,u] = -f[u,v]
+
+
+A flow is maximal if there are no augmenting paths in the residual flow network.
