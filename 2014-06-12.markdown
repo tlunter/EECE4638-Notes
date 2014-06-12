@@ -79,3 +79,7 @@ Given the augmentating path amount, we can segment by along the path
 
 
 A flow is maximal if there are no augmenting paths in the residual flow network.
+
+## Cut network
+
+[Wikipedia](https://en.wikipedia.org/wiki/Cut_\(graph_theory\))
