@@ -1,0 +1,92 @@
+# Flow Network
+
+Flow f with `|f|` the value of the flow
+
+Discussed previously:
+
+1.  Max flow problem
+2.  Residual network
+3.  Augmenting path
+4.  Ford-Fulkerson Algorithm - find augmenting path, augment along path
+
+## Cutting a flow
+
+Cuts a flow in two `(S,T)`
+
+Flow across a cut is `f(S,T)`
+
+Capacity of a cut `c(S,T)`
+
+`f(S,T) <= c(S,T)`: the flow across a cut must be `<=` the capacity of the cut
+
+### Important Results
+
+1.  For any cut `(S,T)`, `f(S,T) = |f|` the flow across the cut equals the total flow in the network
+2.  Since the value of flow = the flow across any cut and since the flow across a cut `<=` capacity of any cut, `|f| <= c(S,T)` for all cuts `(S,T)`
+3.  The max flow (or any flow) must be `<=` capacity of a minimum cut (which has minimum capacity).
+
+### Max flow, min cut theorem
+
+If `f` is a flow then the following are all equivalent
+
+1.  f is a maximum flow
+2.  the residual flow network has no augmenting paths
+3.  the value of the flow = the capacity of some cut
+
+`|f| = c(S,T) for some cut (S,T)`
+
+    A -> B -> C -> A
+
+    A -> B
+
+If `f` is a max flow then the residual flow network has no augmenting paths.
+If there was a max flow with an augmenting path, we could produce a bigger flow which is a contradiction.
+
+    C -> A
+
+From `(2)`, `|f| <= c(S,T)` for all cuts.
+If `|f| <= c(S,T)` then it can't get any bigger
+
+### Residual Flow Augmenting Paths
+
+If the residual flow network has no augmenting paths, seperate the nodes into 2 groups `S` and `T`.
+`S` is the set of nodes reachable from `s`
+It must be true that `c(S,T) = f(S,T) = |f|`
+
+Since `A -> B`, `B -> C`, `C -> A`, they are all equivalent.
+So the value of the max flow is the value of the cut with the minimum capacity
+
+
+## Minimum Cost Flow
+
+Image of cost flow network
+
+Each edge `(u,v)` has:
+
+1.  a nonnegative capacity `c(u,v)`
+2.  a cost per unit flow `d(u,v)`
+
+Each node `v` has:
+
+`b(v)` a net flow
+
+    b(v) > 0, v is a source
+    b(v) < 0, v is a sink
+    b(v) = 0, v passes all flow
+
+Image of sample flow
+
+### Finding a legal flow
+
+If the sum of b = 0, it might have a legal flow
+
+If there is a cut with a capacity less than the positive net flow, can't be a legal flow
+
+We can add a new s and t node with capacities equal to the flows in and out of the sources and sinks.
+Find the max flow and see if you can generate enough flow, in and out of the sources and sinks.
+
+Max flow is a special case of min-cost flow.
+If we have a min-cost flow solver, we can use it to solve max flow.
+
+Given a flow with an additional arc with unlimited capacity and an expensive cost,
+the min-cost flow solver tries to push as much as possible through the normal arcs avoiding the expensive arc.
